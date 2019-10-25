@@ -1,0 +1,30 @@
+/*
+ * This is an example of our Lambda Calculus Calculator
+ *
+ * The abstractions are written as: lam [x1,...,xn] -> t 
+ * The anonymous functions are written as: fun [x1,...,xn] => t
+ * Where x1,...,xn are the linked variables.
+ *
+ * The applications are writte as: t1 <+> t2
+ * Where "t1" and "t2" are the terms and "<+>" is the application operator.
+ *
+ * The let statements are written as: let x := t1 in e2 end
+ * Where "t1" and "t2" are the terms.
+ *
+ * The functions with name are written as: letFun f [x1,...,xn] => t1 in t2 
+ * Where f is the name of the function, x1,...xn are the linked variables
+ * and t1 and t2 are the terms of the function.
+ * 
+ * Observation: If the principal operator is an application then you'll need to
+ * write as (t1 <+> t2)
+*/
+
+//The following program computes the product of two and three, using the Church 
+//numerals
+
+let zero := (fun [s,z] => z) in
+	letFun suc [n] => (fun [s,z] => (s <+> (n <+> s <+> z))) in
+		letFun plus [n,m] => (n <+> suc <+> m) in
+			letFun prod [n,m] => (m <+> (plus <+> n) <+> zero) in
+				(prod <+> (suc <+> (suc <+> zero)) <+> (suc <+> (suc <+> (suc <+> zero))))
+end

@@ -1,0 +1,6 @@
+let zero := (fun [f,z] => z) in
+letFun suc [n] => (fun [s,z] => (s <+> (n <+> s <+> z))) in
+	letFun s [x,f,z] => f <+> x in
+		letFun ctos [n] => n <+> s <+> zero in
+			ctos <+> (suc <+> (suc <+> zero))
+end

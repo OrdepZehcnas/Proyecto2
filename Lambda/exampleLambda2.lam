@@ -1,0 +1,28 @@
+/*
+ * The exam case, the horrible leq
+ * Case: leq 0 2
+ * With Church Numerals
+*/
+
+let true := (fun [x,y] => x) in
+let false := (fun [x,y] => y) in
+let pair := (fun [f,s,b] => (b <+> f <+> s)) in
+let zero := (fun [s,z] => z) in
+	
+	letFun fst [p] => (p <+> true) in
+		letFun snd [p] => (p <+> false) in
+			letFun suc [n] => (fun [s,z] => s <+> (n <+> s <+> z)) in
+				letFun iszero [n] => n <+> (fun [x] => false) <+> true in
+					let zz := (pair <+> zero <+> zero) in
+						let ss := (fun [p] => pair <+> (snd <+> p) <+> (suc <+> (snd <+> p))) in
+							letFun pred [n] => fst <+> (n <+> ss <+> zz) in
+								letFun dp [n,m] => (m <+> pred <+> n) in
+									letFun leq [n,m] => iszero <+> (dp <+> n <+> m) in
+										leq <+> zero <+> (suc <+> (suc <+> zero))
+						end
+					end
+
+end
+end
+end
+end

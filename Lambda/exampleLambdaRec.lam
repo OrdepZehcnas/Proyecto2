@@ -1,0 +1,32 @@
+/*
+* A recursive case: The factorial
+* It's horrible! ... I love it! <3
+*/
+
+let true := (fun [x,y] => x) in
+let false := (fun [x,y] => y) in
+let pair := (fun [f,s,b] => (b <+> f <+> s)) in
+let zero := (fun [s,z] => z) in
+let U := (fun [f,x] => x <+> (f <+> f <+> x)) <+> (fun [f,x] => x <+> (f <+> f <+> x)) in
+	
+	letFun fst [p] => (p <+> true) in
+		letFun snd [p] => (p <+> false) in
+			letFun suc [n] => (fun [s,z] => s <+> (n <+> s <+> z)) in
+				letFun iszero [n] => n <+> (fun [x] => false) <+> true in
+					letFun plus [n,m] => n <+> suc <+> m in
+						letFun prod [n,m] => m <+> (plus <+> n) <+> zero in
+							let zz := (pair <+> zero <+> zero) in
+								let ss := (fun [p] => pair <+> (snd <+> p) <+> (suc <+> (snd <+> p))) in
+									letFun pred [n] => fst <+> (n <+> ss <+> zz) in
+										letFun ift [v,t,f] => v <+> t <+> f in
+											let g := fun [f,n] => ift <+> (iszero <+> n) <+> (suc <+> zero) <+> (prod <+> n <+> (f <+> (pred <+> n))) in
+												letFun fac [x] => (U <+> g) <+> x in
+													fac <+> (suc <+> (suc <+> (suc <+> zero)))
+											end
+								end
+							end
+end
+end
+end
+end
+end

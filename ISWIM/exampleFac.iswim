@@ -1,0 +1,7 @@
+let fix := lam f -> (lam x -> f <+> (x <+> x)) <+> (lam x -> f <+> (x <+> x)) in
+	let g := lam f -> (lam n -> if n = 0 then 1 else n * (f <+> (n-1))) in
+		letFun fac x => (fix <+> g <+> x) in 
+			fac <+> 3 
+		end
+	end
+end
